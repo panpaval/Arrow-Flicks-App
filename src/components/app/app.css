@@ -1,0 +1,22 @@
+.container {
+  margin: 0 auto;
+  display: flex;
+}
+
+.navigate {
+  flex: 0 0 280px;
+}
+
+.main {
+  flex-grow: 1;
+  padding: 14px;
+  background: #f5f5f6;
+  padding: 40px 90px;
+}
+
+.movie-descripption {
+  flex-grow: 1;
+  padding: 14px;
+  background: #f5f5f6;
+  padding: 40px 180px;
+}

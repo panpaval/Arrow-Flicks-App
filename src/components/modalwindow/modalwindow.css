@@ -1,0 +1,23 @@
+.devider-modal {
+  margin-bottom: 16px;
+}
+
+.star-container {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+.film-name-modal {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22.4px;
+  text-align: left;
+}
+
+.frame-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 251px;
+}

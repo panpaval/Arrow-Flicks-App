@@ -1,0 +1,92 @@
+.item-container {
+  display: flex;
+  padding: 24px;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.info-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding-left: 16px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.film-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.film-name {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.2px;
+  text-align: left;
+  color: #9854f6;
+}
+.rating {
+  display: flex;
+  align-items: center;
+}
+.text-style {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: left;
+  color: #7b7c88;
+}
+
+.text-style.release_date {
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.rating-text {
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
+  padding-left: 4px;
+  padding-right: 8px;
+}
+.image-container {
+  height: 170px;
+  width: 119px;
+}
+
+.image-container img {
+  width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.field-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.field-name {
+  width: 140px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.activeStar .star-icon {
+  stroke: #9854f6;
+  fill: #9854f6;
+  cursor: pointer;
+}
+
+.star .star-icon {
+  stroke: #d5d6dc;
+  fill: #d5d6dc;
+  cursor: pointer;
+}

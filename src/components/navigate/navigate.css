@@ -1,0 +1,69 @@
+.container-navigate {
+  background: #f2ebf9;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding-left: 24px;
+  padding-top: 26px;
+  padding-bottom: 80px;
+}
+
+.logo-image {
+  margin-right: 12px;
+  height: auto;
+}
+
+.logo-text {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 36px;
+  color: #9854f6;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  max-width: 232px;
+  padding-left: 24px;
+}
+
+.button {
+  width: 100%;
+  color: #000;
+  font-weight: 400;
+  background-color: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-align: inherit;
+}
+
+.button:hover {
+  background-color: #e5d5fa;
+}
+
+.button:active {
+  background-color: #e5d5fa;
+}
+
+.button-selected {
+  color: #9854f6;
+  font-weight: 700;
+  background-color: #e5d5fa;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  line-height: 22.4px;
+  text-align: left;
+}
+
+.button .mantine-Button-inner {
+  justify-content: flex-start;
+}

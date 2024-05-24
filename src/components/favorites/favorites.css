@@ -1,0 +1,46 @@
+.favorites-head {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 25.5px;
+}
+.favorites-label {
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 44.8px;
+  text-align: left;
+}
+
+.search {
+  width: 490px;
+}
+
+.search-button {
+  margin-right: 60px;
+  width: 88px;
+  height: 32px;
+  font-size: 14px;
+}
+
+.frame-favorites {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 251px;
+}
+
+.title-favorites {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 24.2px;
+  text-align: left;
+  padding: 16px 0;
+}
+
+.redirect-button {
+  width: 122px;
+  height: 40px;
+  font-size: 14px;
+}

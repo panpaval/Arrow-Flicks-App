@@ -1,0 +1,20 @@
+.list-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 16px;
+  padding: 16px 0;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 234px;
+}
+
+.frame {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+}
