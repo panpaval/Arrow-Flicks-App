@@ -1,4 +1,4 @@
-const baseUrl = `{process.env.BASE_URL}/api`;
+const baseUrl = `${process.env.BASE_URL}/api`;
 
 export async function request(filters, page) {
   if (!page) {
