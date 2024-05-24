@@ -1,4 +1,4 @@
-const baseUrl = `http://127.0.0.1:3001/api`;
+const baseUrl = `{process.env.BASE_URL}/api`;
 
 export async function request(filters, page) {
   if (!page) {
