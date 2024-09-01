@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { MovieContext } from "../app/App";
 import { request, genresRequest } from "../services/services";
 import Item from "../item/Item";
@@ -67,7 +67,92 @@ function List() {
     vote_count: movie.vote_count,
   }));
 
-  const endIndex = currentPage * itemsPerPage;
+  const startIndex = 0;
+  const endIndex = itemsPerPage;
+  const limitedData = filteredData.slice(startIndex, endIndex);
+
+  const [cachedPages, setCachedPages] = useState({});
+
+  const handlePaginationChange = async (page) => {
+    setCurrentPage(page);
+
+    if (cachedPages[page]) {
+      // Если данные уже в кэше, используем их
+      setData(cachedPages[page]);
+    } else {
+      setLoading(true);
+      try {
+        const response = await request(filters, page);
+        setData(response.results);
+        // Сохраняем данные в кэш
+        setCachedPages((prev) => ({ ...prev, [page]: response.results }));
+        setLoadedPages([...new Set([...loadedPages, page])]);
+
+        if (page >= totalPages) {
+          setTotalPages(page + 1);
+        }
+      } catch (error) {
+        console.error("Error fetching data for page:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  /*  const handlePaginationChange = async (page) => {
+    setCurrentPage(page);
+
+    // Проверяем, есть ли данные в sessionStorage
+    const cachedData = sessionStorage.getItem(`page_${page}`);
+
+    if (cachedData) {
+      // Если данные есть в кэше, используем их
+      setData(JSON.parse(cachedData));
+    } else {
+      setLoading(true);
+      try {
+        const response = await request(filters, page);
+        setData(response.results);
+
+        // Сохраняем данные в sessionStorage
+        sessionStorage.setItem(
+          `page_${page}`,
+          JSON.stringify(response.results)
+        );
+
+        setLoadedPages([...new Set([...loadedPages, page])]);
+
+        if (page >= totalPages) {
+          setTotalPages(page + 1);
+        }
+      } catch (error) {
+        console.error("Error fetching data for page:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+  }; */
+
+  /*  const handlePaginationChange = async (page) => {
+    setCurrentPage(page);
+    setLoading(true);
+
+    try {
+      const response = await request(filters, page);
+      setData(response.results);
+      setLoadedPages([...new Set([...loadedPages, page])]);
+
+      if (page >= totalPages) {
+        setTotalPages(page + 1);
+      }
+    } catch (error) {
+      console.error("Error fetching data for page:", error);
+    } finally {
+      setLoading(false);
+    }
+  }; */
+
+  /*   const endIndex = currentPage * itemsPerPage;
   const startIndex = endIndex - itemsPerPage;
   const limitedData = filteredData.slice(startIndex, endIndex);
 
@@ -75,8 +160,9 @@ function List() {
     try {
       setLoading(true);
       const response = await request(filters, pageForRequest);
-      setData([...data, ...response.results]);
 
+      setData([...data, ...response.results]);
+      console.log("loadMoreData", data);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching more data:", error);
@@ -86,6 +172,7 @@ function List() {
 
   const handlePaginationChange = (page) => {
     setCurrentPage(page);
+
     if (!loadedPages.includes(page)) {
       setPageForRequest(page + 1);
       loadMoreData(page);
@@ -94,7 +181,12 @@ function List() {
         setTotalPages(page + 1);
       }
     }
-  };
+  }; */
+
+  console.log("Data", data);
+  console.log("currentPage", currentPage);
+  console.log("pageForRequest", pageForRequest);
+  console.log("loadedPages", loadedPages);
 
   return (
     <div>

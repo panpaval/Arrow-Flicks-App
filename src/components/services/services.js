@@ -95,8 +95,6 @@ const baseUrl = `https://api.themoviedb.org/3`;
 const movieListEndpoint = "/discover/movie";
 const genersListEndpoint = "/genre/movie/list";
 const descriptionEndpoint = "/movie/";
-curl --request GET \
-     --url 'https://api.themoviedb.org/3/movie/11?api_key=06daef32dd30e319a5583e95b29ce1ef
 
 export async function request(filters, page) {
   if (!page) {
@@ -151,7 +149,6 @@ export async function genresRequest() {
     console.error("Error fetching data:", error);
   }
 }
-
 
 export async function descriptionRequest(movieId) {
   let url = `${baseUrl}${descriptionEndpoint}${movieId}?api_key=${API_KEY}&language=en-US`;
