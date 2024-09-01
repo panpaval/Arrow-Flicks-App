@@ -11,6 +11,8 @@ import { useMovieDescription } from "./useMovieDescription";
 function List() {
   const itemsPerPage = 20;
 
+  const [cachedPages, setCachedPages] = useState({});
+
   const {
     genres,
     setGenres,
@@ -52,7 +54,7 @@ function List() {
         setLoading(false);
       }
     };
-
+    setCachedPages({});
     fetchData();
   }, [filters]);
 
@@ -71,8 +73,12 @@ function List() {
   const endIndex = itemsPerPage;
   const limitedData = filteredData.slice(startIndex, endIndex);
 
-  const [cachedPages, setCachedPages] = useState({});
+  /* 
+  useEffect(() => {
+    setCachedPages({});
+  }, [filters]); */
 
+  console.log("cached", cachedPages);
   const handlePaginationChange = async (page) => {
     setCurrentPage(page);
 
