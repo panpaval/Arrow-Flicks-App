@@ -20,3 +20,18 @@
   background: #f5f5f6;
   padding: 40px 180px;
 }
+
+@media (max-width: 1126px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .navigate {
+    flex: none;
+    width: 100%;
+  }
+
+  .main {
+    padding: 20px 40px;
+  }
+}

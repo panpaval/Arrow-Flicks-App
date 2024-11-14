@@ -67,3 +67,28 @@
 .button .mantine-Button-inner {
   justify-content: flex-start;
 }
+
+.container-navigate {
+  background: #f2ebf9;
+  height: 100%;
+  min-height: 100vh;
+}
+
+@media (max-width: 1126px) {
+  .container-navigate {
+    min-height: auto;
+    padding-bottom: 20px;
+  }
+
+  .button-container {
+    flex-direction: row;
+    max-width: none;
+    padding: 0 24px;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .logo-container {
+    padding-bottom: 24px;
+  }
+}

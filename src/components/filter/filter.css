@@ -79,3 +79,68 @@ p {
 .chevron:hover {
   animation: shake 1s infinite;
 }
+
+@media (max-width: 750px) {
+  .filter-inputs {
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+  }
+
+  /* Первая колонка */
+  .select:nth-child(1),
+  .select:nth-child(2) {
+    width: calc(50% - 12px); /* Половина ширины минус половина отступа */
+    margin-right: 0;
+  }
+
+  /* Вторая колонка */
+  .select:nth-child(3) {
+    width: 100%;
+    margin-right: 0;
+    order: 2;
+  }
+
+  /* Перемещаем sort-by под рейтинг */
+  .filter-sort-by {
+    width: calc(50% - 12px);
+    padding-top: 0;
+    order: 3;
+    justify-content: flex-start;
+  }
+
+  .filter-sort-by .select {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  /* Кнопка сброса */
+  .filter-reset-button {
+    width: calc(50% - 12px);
+    margin-top: 24px;
+    order: 4;
+  }
+  .filter-raiting-to {
+    padding-left: 0;
+    width: calc(50% - 12px);
+  }
+
+  .filter-raiting-from {
+    padding-right: 0;
+    width: calc(50% - 12px);
+  }
+}
+
+/* Дополнительные стили для более узких экранов */
+/* @media (max-width: 500px) {
+  .filter-inputs {
+    flex-direction: column;
+  }
+
+  .select,
+  .filter-sort-by,
+  .filter-reset-button {
+    width: 100% !important;
+  }
+}
+ */

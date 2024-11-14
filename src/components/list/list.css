@@ -18,3 +18,9 @@
   align-items: center;
   padding-top: 24px;
 }
+
+@media (max-width: 750px) {
+  .list-container {
+    grid-template-columns: 1fr; /* Меняем на одну колонку */
+  }
+}
