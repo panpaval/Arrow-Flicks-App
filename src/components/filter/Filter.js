@@ -21,13 +21,44 @@ function Filter() {
   } = useContext(MovieContext);
   const [error, setError] = useState(null);
 
-  const handleSelectChange = (field, value) => {
+  const ratingOptions = Array.from({ length: 11 }, (_, i) => ({
+    value: i.toString(),
+    label: i.toString(),
+  }));
+
+  /*   const handleSelectChange = (field, value) => {
     if (value < 0) {
       value = 0;
     }
     setFilters((prevFilters) => ({ ...prevFilters, [field]: value }));
   };
+ */
 
+  const handleSelectChange = (field, value) => {
+    setFilters((prevFilters) => {
+      const newValue = Number(value);
+
+      if (
+        field === "voteAverageto" &&
+        newValue < Number(prevFilters.voteAveragefrom)
+      ) {
+        return prevFilters;
+      }
+
+      if (
+        field === "voteAveragefrom" &&
+        newValue > Number(prevFilters.voteAverageto)
+      ) {
+        return {
+          ...prevFilters,
+          [field]: value,
+          voteAverageto: value,
+        };
+      }
+
+      return { ...prevFilters, [field]: value };
+    });
+  };
   const handleNumberChange = (field, value) => {
     if (value < 0 || value > 10) {
       setError("Value must be between 0 and 10");
@@ -123,7 +154,7 @@ function Filter() {
           />
         </div>
 
-        <div className="select">
+        {/* <div className="select">
           <div className="select-label">Ratings</div>
           <div className="filter-inputs">
             <NumberInput
@@ -220,6 +251,59 @@ function Filter() {
                   </div>
                 </div>
               }
+            />
+          </div>
+        </div> */}
+
+        <div className="select">
+          <div className="select-label">Ratings</div>
+          <div className="filter-inputs">
+            <Select
+              className="filter-raiting-from"
+              placeholder="from"
+              radius="md"
+              rightSection={
+                <ChevronDown color={"#ACADB9"} size={30} strokeWidth={1.5} />
+              }
+              styles={{
+                rightSection: { pointerEvents: "none" },
+              }}
+              size="md"
+              transitionProps={{
+                transition: "pop-top-left",
+                duration: 200,
+                timingFunction: "ease",
+              }}
+              data={ratingOptions}
+              value={
+                filters.voteAveragefrom
+                  ? filters.voteAveragefrom.toString()
+                  : ""
+              }
+              onChange={(value) => handleSelectChange("voteAveragefrom", value)}
+            />
+
+            <Select
+              className="filter-raiting-to"
+              placeholder="to"
+              radius="md"
+              rightSection={
+                <ChevronDown color={"#ACADB9"} size={30} strokeWidth={1.5} />
+              }
+              styles={{
+                rightSection: { pointerEvents: "none" },
+              }}
+              size="md"
+              transitionProps={{
+                transition: "pop-top-left",
+                duration: 200,
+                timingFunction: "ease",
+              }}
+              data={ratingOptions}
+              value={
+                filters.voteAverageto ? filters.voteAverageto.toString() : ""
+              }
+              onChange={(value) => handleSelectChange("voteAverageto", value)}
             />
           </div>
         </div>
