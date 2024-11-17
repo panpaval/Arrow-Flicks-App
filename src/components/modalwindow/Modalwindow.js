@@ -78,21 +78,6 @@ function RatingModal({
           xs: "380px",
         }}
         radius="md"
-        styles={(theme) => ({
-          modal: {
-            /*  margin: "0 auto",  */
-            // центрирование по горизонтали
-            /* left: "50% !important", */
-            // важно для правильного позиционирования
-            /* transform: "translateX(-50%)", */
-            // смещение на половину своей ширины влево
-            /* position: "relative", */
-            // обеспечивает работу transform
-          },
-          /* inner: {
-            padding: "16px", // одинаковые отступы со всех сторон
-          }, */
-        })}
       >
         <Divider size="xs" className="devider-modal" />
         <p className="film-name-modal">{movieTitle}</p>

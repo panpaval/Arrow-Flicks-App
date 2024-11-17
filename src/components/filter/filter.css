@@ -86,6 +86,10 @@ p {
     gap: 24px;
     justify-content: space-between;
   }
+  .filter-reset-button {
+    margin-bottom: 24px;
+    margin-top: 1px !important;
+  }
 
   /* Первая колонка */
   .select:nth-child(1),
