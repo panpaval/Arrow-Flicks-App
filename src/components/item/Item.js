@@ -84,7 +84,11 @@ function Item({ movie, genres, description, isDetailView }) {
           <img src={posterURL} alt={title} />
         </div>
       </div>
-      <div className="info-container">
+      <div
+        className={`info-container ${
+          isDetailView ? "info-container-detail" : ""
+        }`}
+      >
         <div className="info">
           <div className="film-info">
             <div className="film-name">{original_title}</div>
