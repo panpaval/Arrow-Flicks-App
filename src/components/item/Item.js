@@ -10,7 +10,7 @@ import {
   formatBudget,
 } from "./function";
 
-function Item({ movie, genres, description }) {
+function Item({ movie, genres, description, isDetailView }) {
   const { favorites, setFavorites, movieRating, setMovieRating } =
     useContext(MovieContext);
   const [modalOpened, setModalOpened] = useState(false);
@@ -71,7 +71,11 @@ function Item({ movie, genres, description }) {
     .join(", ");
 
   return (
-    <div className="item-container">
+    <div
+      className={`item-container ${
+        isDetailView ? "item-container-detail" : ""
+      }`} /* className="item-container" */
+    >
       <div className="image">
         <div
           className="image-container"

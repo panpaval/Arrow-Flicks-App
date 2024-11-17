@@ -26,6 +26,7 @@ const MovieDescription = () => {
             movie={selectedMovieId}
             genres={genres}
             description={description}
+            isDetailView={true}
           />
           {officialTrailer && (
             <div className="description-container">
