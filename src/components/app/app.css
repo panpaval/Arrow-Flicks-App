@@ -26,6 +26,10 @@
     flex-direction: column;
   }
 
+  .movie-descripption {
+    padding: 40px 40px; /* уменьшаем боковые отступы */
+  }
+
   .navigate {
     flex: none;
     width: 100%;
@@ -33,5 +37,10 @@
 
   .main {
     padding: 20px 40px;
+  }
+}
+@media (max-width: 970px) {
+  .movie-descripption {
+    padding: 20px 20px; /* еще уменьшаем отступы */
   }
 }
