@@ -1,7 +1,7 @@
 import "./filter.css";
 import { Button, Select, NumberInput } from "@mantine/core";
 import { ChevronDown, ChevronUp } from "tabler-icons-react";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { MovieContext } from "../app/App";
 
 function Filter() {
@@ -20,11 +20,21 @@ function Filter() {
     setTotalPages,
   } = useContext(MovieContext);
   const [error, setError] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 750);
 
   const ratingOptions = Array.from({ length: 11 }, (_, i) => ({
     value: i.toString(),
     label: i.toString(),
   }));
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 750);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   /*   const handleSelectChange = (field, value) => {
     if (value < 0) {
@@ -102,6 +112,31 @@ function Filter() {
       e.preventDefault();
     }
   };
+
+  const sortByJsx = (
+    <div className="select">
+      <p className="select-label">Sort by</p>
+      <Select
+        radius="md"
+        rightSection={
+          <ChevronDown color={"#ACADB9"} size={30} strokeWidth={1.5} />
+        }
+        styles={{
+          rightSection: { pointerEvents: "none" },
+        }}
+        size="md"
+        transitionProps={{
+          transition: "pop-top-left",
+          duration: 200,
+          timingFunction: "ease",
+        }}
+        data={sortByOptions}
+        value={filters.sort_by}
+        onChange={(value) => handleSelectChange("sort_by", value)}
+        placeholder="Select sort"
+      />
+    </div>
+  );
 
   return (
     <div className="filter">
@@ -307,6 +342,7 @@ function Filter() {
             />
           </div>
         </div>
+        {isMobile && sortByJsx}
         <Button
           className="filter-reset-button"
           variant="link"
@@ -315,7 +351,10 @@ function Filter() {
           Reset filters
         </Button>
       </div>
-      <div className="filter-sort-by">
+      {!isMobile /* Рендерим sort-by здесь на десктопе */ && (
+        <div className="filter-sort-by">{sortByJsx}</div>
+      )}
+      {/*  <div className="filter-sort-by">
         <div className="select">
           <p className="select-label">Sort by</p>
           <Select
@@ -338,7 +377,7 @@ function Filter() {
             placeholder="Select sort"
           />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

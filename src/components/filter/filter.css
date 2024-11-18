@@ -87,13 +87,12 @@ p {
     justify-content: space-between;
   }
   .filter-reset-button {
-    margin-bottom: 24px;
-    margin-top: 1px !important;
+    /*  margin-bottom: 24px; */
+    margin-top: 36px !important;
   }
 
   /* Первая колонка */
-  .select:nth-child(1),
-  .select:nth-child(2) {
+  .select {
     width: calc(50% - 12px); /* Половина ширины минус половина отступа */
     margin-right: 0;
   }
@@ -102,7 +101,7 @@ p {
   .select:nth-child(3) {
     width: 100%;
     margin-right: 0;
-    order: 2;
+    /*   order: 2; */
   }
 
   /* Перемещаем sort-by под рейтинг */
