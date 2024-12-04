@@ -19,6 +19,7 @@
 .film-info {
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 }
 
 .film-name {
@@ -128,5 +129,13 @@ border-radius: 10px; */
 
   .field-container {
     flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 400px) {
+  .item-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
   }
 }

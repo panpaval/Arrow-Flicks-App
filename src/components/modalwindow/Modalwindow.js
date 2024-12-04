@@ -73,10 +73,12 @@ function RatingModal({
         onClose={() => setOpened(false)}
         title="Your raiting"
         centered
-        size={{
-          base: "85%",
-          xs: "380px",
-        }}
+        size={
+          {
+            /*  base: "85%",
+          xs: "380px", */
+          }
+        }
         radius="md"
       >
         <Divider size="xs" className="devider-modal" />
