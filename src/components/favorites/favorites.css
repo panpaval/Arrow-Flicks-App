@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-between;
   padding-bottom: 25.5px;
-  /* flex-direction: column; */
   flex-wrap: wrap;
 }
 .favorites-label {

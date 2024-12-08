@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect, useRef } from "react";
 import { MovieContext } from "../app/App";
 import RatingModal from "../modalwindow/Modalwindow";
 import altImage from "./Alt.svg";
@@ -14,6 +14,26 @@ function Item({ movie, genres, description, isDetailView }) {
   const { favorites, setFavorites, movieRating, setMovieRating } =
     useContext(MovieContext);
   const [modalOpened, setModalOpened] = useState(false);
+  const [isNarrow, setIsNarrow] = useState(false);
+  const itemRef = useRef(null);
+
+  //для уменьшения шрифта названия фильма в засимости от ширины экрана
+  useEffect(() => {
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        const width = entry.contentRect.width;
+        setIsNarrow(width < 420);
+      }
+    });
+
+    if (itemRef.current) {
+      observer.observe(itemRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   const {
     original_title,
@@ -74,7 +94,8 @@ function Item({ movie, genres, description, isDetailView }) {
     <div
       className={`item-container ${
         isDetailView ? "item-container-detail" : ""
-      }`} /* className="item-container" */
+      }`}
+      ref={itemRef}
     >
       <div className="image">
         <div
@@ -91,7 +112,13 @@ function Item({ movie, genres, description, isDetailView }) {
       >
         <div className="info">
           <div className="film-info">
-            <div className="film-name">{original_title}</div>
+            <div
+              className={`film-name ${
+                isNarrow && original_title.length > 30 ? "long-title" : ""
+              }`}
+            >
+              {original_title}
+            </div>
             <div onClick={handleStarClick} className="rating">
               <svg
                 width="28"
@@ -182,3 +209,7 @@ function Item({ movie, genres, description, isDetailView }) {
 }
 
 export default Item;
+
+/* className={`film-name ${
+  original_title.length > 30 ? "long-title" : ""
+}`} */

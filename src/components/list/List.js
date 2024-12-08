@@ -56,6 +56,7 @@ function List() {
     };
     setCachedPages({}); //затираем кэш при каждом изменении фильтров
     fetchData();
+    setTotalPages(3);
   }, [filters]);
 
   const filteredData = data.map((movie) => ({
@@ -73,7 +74,6 @@ function List() {
   const endIndex = itemsPerPage;
   const limitedData = filteredData.slice(startIndex, endIndex);
 
-  console.log("cached", cachedPages);
   const handlePaginationChange = async (page) => {
     setCurrentPage(page);
 
@@ -88,8 +88,10 @@ function List() {
         // Сохраняем данные в кэш
         setCachedPages((prev) => ({ ...prev, [page]: response.results }));
         setLoadedPages([...new Set([...loadedPages, page])]);
-
-        if (page >= totalPages) {
+        //Либо увелличиваем количество страниц пагинации, либо приравниваем к текущей странице в зависмости от полноты данных
+        if (response.results.length < 20) {
+          setTotalPages(page);
+        } else if (page >= totalPages) {
           setTotalPages(page + 1);
         }
       } catch (error) {
@@ -100,11 +102,9 @@ function List() {
     }
   };
 
-  console.log("Data", data);
-  console.log("currentPage", currentPage);
-  console.log("pageForRequest", pageForRequest);
-  console.log("loadedPages", loadedPages);
-
+  console.log("длинна массива с фильмами", data.length);
+  console.log("текущая страница", currentPage);
+  console.log("totalPages", totalPages);
   return (
     <div>
       {loading ? (
@@ -127,6 +127,7 @@ function List() {
               </div>
             ))}
           </div>
+
           <Pagination
             value={currentPage}
             total={totalPages}

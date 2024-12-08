@@ -55,9 +55,27 @@ function App() {
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [description, setDescription] = useState([]);
   const [trailer, setTrailer] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  /* const [favorites, setFavorites] = useState([]); */
+  const [favorites, setFavorites] = useState(() => {
+    const savedFavorites = localStorage.getItem("movies_favorites");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("movies_favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  console.log("favorites LOCALSTORAGE", favorites);
   const [activeButton, setActiveButton] = useState("movies");
-  const [movieRating, setMovieRating] = useState({});
+  /*  const [movieRating, setMovieRating] = useState({}); */
+  const [movieRating, setMovieRating] = useState(() => {
+    const savedRatings = localStorage.getItem("movieRatings");
+    return savedRatings ? JSON.parse(savedRatings) : {};
+  });
+
+  useEffect(() => {
+    localStorage.setItem("movieRatings", JSON.stringify(movieRating));
+  }, [movieRating]);
 
   useEffect(() => {
     const hasFilters = Object.values(filters).some((filter) => filter !== "");

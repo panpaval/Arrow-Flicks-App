@@ -27,7 +27,7 @@
   }
 
   .movie-descripption {
-    padding: 40px 40px; /* уменьшаем боковые отступы */
+    padding: 40px 40px;
   }
 
   .navigate {
@@ -41,6 +41,6 @@
 }
 @media (max-width: 970px) {
   .movie-descripption {
-    padding: 20px 20px; /* еще уменьшаем отступы */
+    padding: 20px 20px;
   }
 }
