@@ -22,7 +22,6 @@ function List() {
     setFirstRequest,
     loading,
     setLoading,
-    pageForRequest,
     setPageForRequest,
     currentPage,
     setCurrentPage,
@@ -40,7 +39,7 @@ function List() {
         setLoading(true);
         const genresResponse = await genresRequest();
         setGenres(genresResponse.genres);
-
+        console.log("список жанров", genresResponse.genres);
         const moviesResponse = await request(filters);
 
         setData(moviesResponse.results);
@@ -101,6 +100,10 @@ function List() {
       }
     }
   };
+
+  /*  if (data.length < 19) {
+    setTotalPages(currentPage);
+  } */
 
   console.log("длинна массива с фильмами", data.length);
   console.log("текущая страница", currentPage);

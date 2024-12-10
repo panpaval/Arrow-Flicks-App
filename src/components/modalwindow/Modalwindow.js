@@ -58,15 +58,6 @@ function RatingModal({
 
   return (
     <div>
-      {/*  <Modal
-        onClick={handleModalClick}
-        opened={opened}
-        onClose={() => setOpened(false)}
-        title="Your raiting"
-        centered
-        size={380}
-        radius="md"
-      > */}
       <Modal
         onClick={handleModalClick}
         opened={opened}

@@ -1,14 +1,72 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MovieContext } from "../app/App";
 import Item from "../item/Item";
 import "./description.css";
 import { Divider } from "@mantine/core";
+import { descriptionRequest, trailerRequest } from "../services/services";
+import LoaderForList from "../skeleton/loader";
 
 const MovieDescription = () => {
-  const { selectedMovieId, genres, description, trailer } =
-    useContext(MovieContext);
+  const {
+    selectedMovieId,
+    setSelectedMovieId,
+    genres,
+    description,
+    setDescription,
+    trailer,
+    setTrailer,
+  } = useContext(MovieContext);
   const { id } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const loadMovieData = async () => {
+      if (!selectedMovieId || selectedMovieId.id !== parseInt(id)) {
+        setLoading(true);
+        try {
+          const [movieData, trailerData] = await Promise.all([
+            descriptionRequest(id),
+            trailerRequest(id),
+          ]);
+
+          // Создаем объект фильма из полученных данных
+          const movieObject = {
+            id: parseInt(id),
+            title: movieData.title,
+            original_title: movieData.original_title,
+            release_date: movieData.release_date,
+            vote_average: movieData.vote_average,
+            poster_path: movieData.poster_path,
+            vote_count: movieData.vote_count,
+            genre_ids: movieData.genres.map((genre) => genre.id),
+          };
+
+          setSelectedMovieId(movieObject);
+          setDescription(movieData);
+          setTrailer(trailerData.results);
+        } catch (err) {
+          setError("Failed to load movie data");
+          console.error("Error loading movie data:", err);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    loadMovieData();
+  }, [id, selectedMovieId, setSelectedMovieId, setDescription, setTrailer]);
+
+  if (loading) {
+    return <LoaderForList />;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   function findOfficialTrailer(videos) {
     return videos.find(

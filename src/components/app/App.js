@@ -5,7 +5,12 @@ import "normalize.css/normalize.css";
 import Navigate from "../navigate/Navigate";
 import Filter from "../filter/Filter";
 import List from "../list/List";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useSearchParams,
+} from "react-router-dom";
 import MovieDescription from "../description/MovieDescription";
 import Favorites from "../favorites/Favorites";
 
@@ -43,7 +48,29 @@ const sortBy = [
 
 function App() {
   const [genres, setGenres] = useState([]);
-  const [filters, setFilters] = useState(initialFilters);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+  const getInitialFilters = () => {
+    const urlFilters = {};
+    searchParams.forEach((value, key) => {
+      if (value) {
+        if (key === "voteAveragefrom" || key === "voteAverageto") {
+          urlFilters[key] = parseFloat(value);
+        } else {
+          urlFilters[key] = value;
+        }
+      }
+    });
+    return Object.keys(urlFilters).length > 0
+      ? { ...initialFilters, ...urlFilters }
+      : initialFilters;
+  };
+
+  const [filters, setFilters] = useState(getInitialFilters());
+  /*  useEffect(() => {
+    sessionStorage.setItem("filters", JSON.stringify(filters));
+  }, [filters]); */
+
   const [data, setData] = useState([]);
   const [firstRequest, setFirstRequest] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -55,7 +82,7 @@ function App() {
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [description, setDescription] = useState([]);
   const [trailer, setTrailer] = useState([]);
-  /* const [favorites, setFavorites] = useState([]); */
+
   const [favorites, setFavorites] = useState(() => {
     const savedFavorites = localStorage.getItem("movies_favorites");
     return savedFavorites ? JSON.parse(savedFavorites) : [];
@@ -76,6 +103,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("movieRatings", JSON.stringify(movieRating));
   }, [movieRating]);
+
+  useEffect(() => {
+    const params = {};
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value !== "" && value !== initialFilters[key]) {
+        params[key] = value.toString();
+      }
+    });
+    setSearchParams(params);
+  }, [filters, setSearchParams]);
 
   useEffect(() => {
     const hasFilters = Object.values(filters).some((filter) => filter !== "");
@@ -148,40 +185,39 @@ function App() {
         setActiveButton,
       }}
     >
-      <Router>
-        <div className="container">
-          <div className="navigate">
-            <Navigate />
-          </div>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <div className="main">
-                  <Filter />
-                  <List />
-                </div>
-              }
-            />
-            <Route
-              path="/movie/:id"
-              element={
-                <div className="movie-descripption">
-                  <MovieDescription />
-                </div>
-              }
-            />
-            <Route
-              path="/favorites"
-              element={
-                <div className="main">
-                  <Favorites />
-                </div>
-              }
-            />
-          </Routes>
+      <div className="container">
+        <div className="navigate">
+          <Navigate />
         </div>
-      </Router>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <div className="main">
+                <Filter />
+                <List />
+              </div>
+            }
+          />
+          <Route
+            path="/movie/:id"
+            element={
+              <div className="movie-descripption">
+                <MovieDescription />
+              </div>
+            }
+          />
+          <Route
+            path="/favorites"
+            element={
+              <div className="main">
+                <Favorites />
+              </div>
+            }
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </div>
     </MovieContext.Provider>
   );
 }

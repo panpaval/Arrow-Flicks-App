@@ -209,7 +209,3 @@ function Item({ movie, genres, description, isDetailView }) {
 }
 
 export default Item;
-
-/* className={`film-name ${
-  original_title.length > 30 ? "long-title" : ""
-}`} */
