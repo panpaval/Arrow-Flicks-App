@@ -77,7 +77,7 @@ function App() {
   const [pageForRequest, setPageForRequest] = useState(2);
   const [currentPage, setCurrentPage] = useState(1);
   const [loadedPages, setLoadedPages] = useState([1]);
-  const [totalPages, setTotalPages] = useState(3);
+  const [totalPages, setTotalPages] = useState(2);
   const [sortByOptions, setSortByOptions] = useState(sortBy);
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const [description, setDescription] = useState([]);

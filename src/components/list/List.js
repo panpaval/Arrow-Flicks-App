@@ -39,6 +39,37 @@ function List() {
         setLoading(true);
         const genresResponse = await genresRequest();
         setGenres(genresResponse.genres);
+        const moviesResponse = await request(filters);
+
+        setData(moviesResponse.results);
+        setFirstRequest(moviesResponse.results);
+        setCurrentPage(1);
+        setPageForRequest(2);
+        setLoadedPages([1]);
+
+        // Добавляем проверку длины результатов при первом запросе
+        if (moviesResponse.results.length < 20) {
+          setTotalPages(1); // Если элементов меньше 20, устанавливаем 1 страницу
+        } else {
+          setTotalPages(2); // Иначе устанавливаем начальное значение
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setLoading(false);
+      }
+    };
+    setCachedPages({});
+    fetchData();
+  }, [filters]);
+
+  /*   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const genresResponse = await genresRequest();
+        setGenres(genresResponse.genres);
         console.log("список жанров", genresResponse.genres);
         const moviesResponse = await request(filters);
 
@@ -56,7 +87,7 @@ function List() {
     setCachedPages({}); //затираем кэш при каждом изменении фильтров
     fetchData();
     setTotalPages(3);
-  }, [filters]);
+  }, [filters]); */
 
   const filteredData = data.map((movie) => ({
     id: movie.id,
@@ -100,10 +131,6 @@ function List() {
       }
     }
   };
-
-  /*  if (data.length < 19) {
-    setTotalPages(currentPage);
-  } */
 
   console.log("длинна массива с фильмами", data.length);
   console.log("текущая страница", currentPage);
