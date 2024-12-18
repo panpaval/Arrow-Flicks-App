@@ -64,3 +64,11 @@
     aspect-ratio: 16/9;
   }
 }
+
+.spiner-description {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 28px);
+  width: 100%;
+}

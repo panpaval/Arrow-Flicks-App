@@ -61,7 +61,11 @@ const MovieDescription = () => {
   }, [id, selectedMovieId, setSelectedMovieId, setDescription, setTrailer]);
 
   if (loading) {
-    return <LoaderForList />;
+    return (
+      <div className="spiner-description">
+        <LoaderForList />
+      </div>
+    );
   }
 
   if (error) {
