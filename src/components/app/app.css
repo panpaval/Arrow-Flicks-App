@@ -19,17 +19,16 @@
   padding: 14px;
   background: #f5f5f6;
   padding: 40px 180px;
-  min-height: calc(100vh - var(--navigate-height, 0px));
 }
 
 @media (max-width: 1260px) {
   .container {
     flex-direction: column;
+    height: 100vh;
   }
 
   .movie-descripption {
     padding: 40px 40px;
-    min-height: 100vh;
   }
 
   .navigate {
@@ -44,6 +43,9 @@
 @media (max-width: 970px) {
   .movie-descripption {
     padding: 20px 20px;
-    min-height: 100vh;
+  }
+
+  .container {
+    height: 100vh;
   }
 }
