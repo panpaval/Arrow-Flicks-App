@@ -64,31 +64,6 @@ function List() {
     fetchData();
   }, [filters]);
 
-  /*   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const genresResponse = await genresRequest();
-        setGenres(genresResponse.genres);
-        console.log("список жанров", genresResponse.genres);
-        const moviesResponse = await request(filters);
-
-        setData(moviesResponse.results);
-        setFirstRequest(moviesResponse.results);
-        setCurrentPage(1);
-        setPageForRequest(2);
-        setLoadedPages([1]);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        setLoading(false);
-      }
-    };
-    setCachedPages({}); //затираем кэш при каждом изменении фильтров
-    fetchData();
-    setTotalPages(3);
-  }, [filters]); */
-
   const filteredData = data.map((movie) => ({
     id: movie.id,
     genre_ids: movie.genre_ids,
@@ -132,9 +107,6 @@ function List() {
     }
   };
 
-  console.log("длинна массива с фильмами", data.length);
-  console.log("текущая страница", currentPage);
-  console.log("totalPages", totalPages);
   return (
     <div>
       {loading ? (
@@ -143,7 +115,17 @@ function List() {
         </div>
       ) : data.length === 0 ? (
         <div className="frame">
-          <img src={Frame} alt="Logo" />
+          <img
+            src={Frame}
+            alt="Logo"
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+              "@media (max-width: 500px)": {
+                width: "80%",
+              },
+            }}
+          />
         </div>
       ) : (
         <>
